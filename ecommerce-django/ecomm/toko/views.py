@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
+from django.shortcuts import render
+from .models import Contact
 
 
 from .forms import CheckoutForm
@@ -212,3 +214,19 @@ def paypal_return(request):
 def paypal_cancel(request):
     messages.error(request, 'Pembayaran dibatalkan')
     return redirect('toko:order-summary')
+
+def contact(request):
+    if request.method == "POST":
+        contact = Contact()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        contact.name = name
+        contact.email = email
+        contact.subject = subject
+        contact.message = message
+        contact.save()
+        
+    return render(request, 'contact.html')

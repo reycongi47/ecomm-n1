@@ -4,9 +4,9 @@ from django.db import models
 from django.urls import reverse
 
 PILIHAN_KATEGORI = (
+    ('OW', 'Outwear'),
     ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('SH', 'Shoe')
 )
 
 PILIHAN_LABEL = (
@@ -32,6 +32,15 @@ class ProdukItem(models.Model):
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
 
+    def get_all_product():
+        return ProdukItem.objects.all()
+    
+    def get_all_product(PILIHAN_KATEGORI):
+        if PILIHAN_KATEGORI:
+            return ProdukItem.objects.filter(category=PILIHAN_KATEGORI)
+        else:
+            return ProdukItem.get_all_product()
+
     def __str__(self):
         return f"{self.nama_produk} - ${self.harga}"
 
@@ -49,7 +58,7 @@ class ProdukItem(models.Model):
         return reverse("toko:remove-from-cart", kwargs={
             "slug": self.slug
             })
-    
+
 class OrderProdukItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
@@ -132,3 +141,11 @@ class Payment(models.Model):
     
     class Meta:
         verbose_name_plural = 'Payment'
+
+class Contact(models.Model):
+    name = models.CharField(max_length=158)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
