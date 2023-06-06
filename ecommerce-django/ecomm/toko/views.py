@@ -12,6 +12,7 @@ from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
 
 from .models import Contact
+from django.views.decorators.csrf import csrf_protect
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
