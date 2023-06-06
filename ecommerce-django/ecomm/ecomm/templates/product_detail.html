@@ -100,7 +100,40 @@
             <!--Grid column-->
         </div>
         <!--Grid row-->
+        <!-- Daftar komentar -->
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="my-4 h4">Komentar</h4>
+                {% if produk.komentar.all %}
+                {% for komentar in produk.komentar.all %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ komentar.user.username }}</h6>
+                        <p class="card-text">{{ komentar.isi_komentar }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>Tidak ada komentar untuk produk ini.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Form komentar -->
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="my-4 h4">Tambahkan Komentar</h4>
+                <form method="POST" action="{% url 'toko:tambah-komentar' produk.slug %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" name="isi_komentar" rows="4" placeholder="Komentar Anda"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </main>
-<!--Main layout-->
+
 {% endblock content%}
+
