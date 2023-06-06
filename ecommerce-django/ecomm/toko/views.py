@@ -14,7 +14,6 @@ from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Paymen
 
 from .models import Contact, Komentar
 
-
 class HomeListView(generic.ListView):
     template_name = 'home.html'
     queryset = ProdukItem.objects.all()
