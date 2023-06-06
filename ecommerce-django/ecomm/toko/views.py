@@ -6,10 +6,10 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from .forms import CheckoutForm
-from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+from .forms import CheckoutForm, KomentarForm
+from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Komentar
 
 from .models import Contact
 
@@ -21,6 +21,18 @@ class HomeListView(generic.ListView):
 class ProductDetailView(generic.DetailView):
     template_name = 'product_detail.html'
     queryset = ProdukItem.objects.all()
+
+class TambahKomentarView(LoginRequiredMixin, View):
+    def post(self, request, slug):
+        produk_item = get_object_or_404(ProdukItem, slug=slug)
+        form = KomentarForm(request.POST)
+        if form.is_valid():
+            komentar = form.save(commit=False)
+            komentar.produk_item = produk_item
+            komentar.user = request.user
+            komentar.save()
+            return redirect('toko:produk-detail', slug=slug)
+        return render(request, 'tambah_komentar.html', {'form': form})
 
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):
