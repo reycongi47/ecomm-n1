@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'allauth',
+
     'allauth.account',
     'allauth.socialaccount',
 
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 
     'paypal.standard.ipn',
+    'toko',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -67,6 +69,8 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
