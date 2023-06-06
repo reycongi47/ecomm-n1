@@ -1,10 +1,20 @@
 {% extends "openid/base.html" %}
+{% load crispy_forms_tags %}
 
 {% load i18n %}
+{% load account socialaccount %}
 
 {% block head_title %}OpenID Sign In{% endblock %}
 
 {% block content %}
+<main>
+    <div class="container">
+        <div class="my-3 col-6 offset-3">
+            <h1>{% trans "Sign In" %}</h1>
+            {% get_providers as socialaccount_providers %}
+        </div>
+    </div>
+</main>
 
 <h1>{% trans 'OpenID Sign In' %}</h1>
 
