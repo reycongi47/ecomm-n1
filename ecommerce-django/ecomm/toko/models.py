@@ -31,7 +31,7 @@ class ProdukItem(models.Model):
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
-    komentar = models.ManyToManyField(Komentar, blank=True)
+    komentar = models.ManyToManyField('Komentar', blank=True)
 
     def get_all_product():
         return ProdukItem.objects.all()
