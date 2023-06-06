@@ -7,12 +7,14 @@ from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.base import View
 
 from .forms import CheckoutForm, KomentarForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Komentar
 
 from .models import Contact
 from django.views.decorators.csrf import csrf_protect
+
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
