@@ -2,6 +2,8 @@ from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
+from .models import Komentar
+
 PILIHAN_PEMBAYARAN = (
     ('P', 'Paypal'),
     ('S', 'Stripe'),
@@ -19,3 +21,8 @@ class Contact(forms.Form):
     name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     message = forms.CharField(widget=forms.Textarea)
+
+class KomentarForm(forms.ModelForm):
+    class Meta:
+        model = Komentar
+        fields = ['isi_komentar']
