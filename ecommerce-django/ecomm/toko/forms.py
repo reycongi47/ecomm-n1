@@ -14,3 +14,8 @@ class CheckoutForm(forms.Form):
     kode_pos = forms.CharField(widget=forms.TextInput(attrs={'class': 'textinput form-outline', 'placeholder': 'Kode Pos'}))
     simpan_info_alamat = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     opsi_pembayaran = forms.ChoiceField(widget=forms.RadioSelect(), choices=PILIHAN_PEMBAYARAN)
+
+class Contact(forms.Form):
+    name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    message = forms.CharField(widget=forms.Textarea)

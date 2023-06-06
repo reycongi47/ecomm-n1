@@ -7,11 +7,11 @@ from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 from django.shortcuts import render
-from .models import Contact
-
 
 from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+
+from .models import Contact
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
@@ -220,12 +220,10 @@ def contact(request):
         contact = Contact()
         name = request.POST.get('name')
         email = request.POST.get('email')
-        subject = request.POST.get('subject')
         message = request.POST.get('message')
 
         contact.name = name
         contact.email = email
-        contact.subject = subject
         contact.message = message
         contact.save()
         
