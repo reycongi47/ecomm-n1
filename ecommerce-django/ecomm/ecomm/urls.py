@@ -19,11 +19,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from toko.views import TambahKomentarView
+
+app_name = 'toko'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('toko.urls', namespace='toko')),
+    path('produk/<slug:slug>/tambah-komentar/', TambahKomentarView.as_view(), name='tambah-komentar'),
 ]
 
 if settings.DEBUG:
