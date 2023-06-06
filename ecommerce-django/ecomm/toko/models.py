@@ -31,7 +31,7 @@ class ProdukItem(models.Model):
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
-    komentar = models.ManyToManyField('Komentar', blank=True)
+    komentar = models.ManyToManyField('Komentar', blank=True, related_name='produk_items')
 
     def get_all_product():
         return ProdukItem.objects.all()
@@ -155,7 +155,7 @@ class Contact(models.Model):
         verbose_name_plural = 'Contact'
 
 class Komentar(models.Model):
-    produk_item = models.ForeignKey(ProdukItem, on_delete=models.CASCADE, related_name='komentar')
+    produk_item = models.ForeignKey(ProdukItem, on_delete=models.CASCADE, related_name='komentars')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     isi_komentar = models.TextField()
     tanggal_komentar = models.DateTimeField(auto_now_add=True)
