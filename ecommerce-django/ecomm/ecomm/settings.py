@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 
     'paypal.standard.ipn',
-    'toko',
 ]
 
 AUTHENTICATION_BACKENDS = [
