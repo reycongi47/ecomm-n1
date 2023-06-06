@@ -12,8 +12,7 @@ from django.views.generic.base import View
 from .forms import CheckoutForm, KomentarForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Komentar
 
-from .models import Contact
-from django.views.decorators.csrf import csrf_protect
+from .models import Contact, Komentar
 
 
 class HomeListView(generic.ListView):
@@ -35,7 +34,7 @@ class TambahKomentarView(LoginRequiredMixin, View):
             komentar.user = request.user
             komentar.save()
             return redirect('toko:produk-detail', slug=slug)
-        return render(request, 'tambah_komentar.html', {'form': form})
+        return render(request, 'tambah_komentar.html', {'form': form, 'produk': produk_item})
 
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):

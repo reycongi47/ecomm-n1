@@ -104,8 +104,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 class="my-4 h4">Komentar</h4>
-                {% if produk.komentar.all %}
-                {% for komentar in produk.komentar.all %}
+                {% if produk.komentars.all %}
+                {% for komentar in produk.komentars.all %}
                 <div class="card mb-3">
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">{{ komentar.user.username }}</h6>
@@ -123,7 +123,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 class="my-4 h4">Tambahkan Komentar</h4>
-                <form method="POST" action="{% url 'toko:tambah-komentar' object.slug %}">
+                <form method="POST" action="{% url 'toko:tambah-komentar' produk.slug %}">
                     {% csrf_token %}
                     <div class="form-group">
                         <textarea class="form-control" name="isi_komentar" rows="4" placeholder="Komentar Anda"></textarea>
